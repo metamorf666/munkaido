@@ -1,6 +1,6 @@
 # Munkaidő nyilvántartó
 
-### Funkciobális követelmények:
+### Funkcionális követelmények:
 - Felhasználóként szeretnék tudni bejelentkezni az oldalra
 - Felhasználóként szeretném tudni a profiladataimat szerkeszteni.<br><br>
 - Fejlesztőként szeretném a hozzám rendelt projekteket, taskokat megtekinteni.
@@ -14,7 +14,7 @@
 - Projektmenedzserként szeretnék a projekthez időt loggolni.<br><br>
 - Adminként szeretnék felhasználókat hozzáadni,törölni adataikat módosítani.
 
-### Nem funkciobális követelmények:
+### Nem funkcionális követelmények:
 - Felhasználóbarát, ergonomikus elrendezés és kinézet.
 - Gyors, megbízható működés.
 - Biztonságos működés: jelszavak tárolása, funkciókhoz való hozzáférés.
