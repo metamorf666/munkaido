@@ -9,7 +9,6 @@
 - Projektmenedzserként szeretnék projektet létrehozni.
 - Projektmenedzserként szeretném a saját projektjeimet törölni, módosítani,lezárni.
 - Projektmenedzserként szeretnék a saját projektemhez taskokat létrehozni, módosítani, törölni,lezárni.
-- Projektmenedzserként szeretnék a projektek, taskok között keresni.
 - Projektmenedzserként szeretném a projekthez loggolt időket megtekinteni.
 - Projektmenedzserként szeretnék projektjeimhez, és azok taskjaihoz fejlesztőket hozzárendelni, illetve törölni.
 - Projektmenedzserként szeretnék a projekthez időt loggolni.<br><br>
