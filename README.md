@@ -90,25 +90,26 @@ Felhasználó
 - Kilépés
 - Projektek böngészése
     + Feladatok böngészése
-        +Logok böngészése
+        + Logok böngészése
+        + Idő logolása
     + Logok böngészése
 - Felhasználóhoz rendelt projektek böngészése
-    + Idó logolása        
+    + Idő logolása        
 
 Projektvezető 
 
 - Új projekt hozzáadása    
 - Saját projektek böngészése
-    +Projekt törlése
-    +Feladat megtekintése
-         +Résztvevők szerkesztése
-            +Feladhoz rendelése
-            +Feladatról eltávolítás
-    +Feladat létrehozása
-    +Feladat törlése
-    +Résztvevők szerkesztése
-        +Hozzárendelés
-        +Eltávolítás
+    + Projekt törlése
+    + Feladat megtekintése
+         + Résztvevők szerkesztése
+            + Feladhoz rendelése
+            + Feladatról eltávolítás
+    + Feladat létrehozása
+    + Feladat törlése
+    + Résztvevők szerkesztése
+        + Hozzárendelés
+        + Eltávolítás
 
 Admin
 
