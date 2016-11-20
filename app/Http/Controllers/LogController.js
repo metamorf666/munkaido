@@ -461,7 +461,7 @@ class LogController {
     logData.task_id = id2;
     const log = yield Log.create(logData)
     // response.send(recipe.toJSON())
-    response.redirect('/')
+    response.redirect('/projects/'+project.id)
   }
 
     * projectLog (request, response) {
@@ -477,7 +477,9 @@ class LogController {
     const rules = {
       hours: 'required|number'
     };
-
+    
+    logData.user_id = request.currentUser.id;
+    logData.project_id = id;
     const validation = yield Validator.validateAll(logData, rules)
 /*
     if (validation.fails()) {
@@ -490,8 +492,7 @@ class LogController {
     }
 */
   
-    logData.user_id = request.currentUser.id;
-    logData.project_id = id;
+    
     const log = yield Log.create(logData)
     // response.send(recipe.toJSON())
     response.redirect('/projects/'+project.id)
