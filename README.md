@@ -267,19 +267,19 @@ Admin
 ### Designtervek (végső megvalósítás kinézete):
 
 **Főoldal**
-![](docs/images/design/fooldal.png)
+![](docs/design/fooldal.png)
 
 **Felhasználó hozzáadása oldal**
-![](docs/images/design/addUser.jpg)
+![](docs/design/addUser.png)
 
 **Bejelentkező oldal**
-![](docs/images/design/login-png.png)
+![](docs/design/login-png.png)
 
 **Saját project**
-![](docs/images/design/ownProject.png)
+![](docs/design/ownProject.png)
 
 **Project oldal,logok, törlés**
-![](docs/images/design/projectLogs.png)
+![](docs/design/projectLogs.png)
 
 **Project módosítása**
 ![](docs/design/editProjekt.png)
