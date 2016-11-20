@@ -40,7 +40,6 @@ Route.get('/ownuserprojects', 'LogController.ownUserProjectShow')
 
 
 Route.get('/projects/:id/:id2', 'LogController.taskShow')
-Route.get('/recipes', 'RecipeController.search')
 
 Route.get('/addUser', 'UserController.register')
 Route.get('/login', 'UserController.login')
