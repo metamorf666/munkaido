@@ -97,8 +97,8 @@ Felhasználó
 
 Projektvezető 
 
--Új projekt hozzáadása    
--Saját projektek böngészése
+- Új projekt hozzáadása    
+- Saját projektek böngészése
     +Projekt törlése
     +Feladat megtekintése
          +Résztvevők szerkesztése
@@ -112,7 +112,7 @@ Projektvezető
 
 Admin
 
--Felhasználó hozzáadása        
+- Felhasználó hozzáadása        
 
 ### Végpontok
 
