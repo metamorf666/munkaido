@@ -300,10 +300,8 @@ Admin
 ![](docs/design/attached.png)
 
 **Új projekt felvétele**
-![](docs/design/newProject.jpg)
+![](docs/design/newProject.png)
 
-**Koktél megtekintése**
-![](docs/design/id-design.jpg)
  
 ### Fejlesztőkörnyezet:
 
