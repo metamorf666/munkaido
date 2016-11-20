@@ -1,0 +1,38 @@
+{% extends "layout" %}
+
+{% block content %}
+<h2>{{ project.task.name }}</h2>
+<h3>Leírás</h3>
+<pre>
+{{ project.task.description }}
+</pre>
+
+{% if canLog %}
+<a href="/projects/{{ project.id }}/{{project.task.id}}/log" class="btn btn-default">
+    Loggol
+</a>
+{% endif %}
+{% if (project.user_id == currentUser.id) %}
+<a href="/projects/{{ project.id }}/{{ project.task.id }}/edit" class="btn btn-default">
+    Szerkeszt
+</a>
+<a href="/projects/{{ project.id }}/{{ project.task.id }}/users" class="btn btn-default">
+    Résztvevők módosítása
+</a>
+<a href="/recipes/{{ recipe.id }}/{{ project.task.id }}/delete" class="btn btn-danger">
+    Töröl
+</a>
+{% endif %}
+
+<ul>
+<h3>Logs</h3>
+</br>
+{% for log in project.task.logs %}
+        
+        <li class="list-group-item">
+          Órák: {{ log.hours}} | Leírás: {{log.description}} | User: {{log.user_id }}  | Feladat: {{log.task_id }}
+        </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

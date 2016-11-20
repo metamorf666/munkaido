@@ -1,0 +1,60 @@
+{% extends "layout" %}
+
+{% block content %}
+<h2>{{ project.name }}</h2>
+<h3>Vezető</h3>
+<pre>
+{{ project.leader.firstname }} {{ project.leader.lastname }}
+</pre>
+<h3>Leírás</h3>
+<pre>
+{{ project.description }}
+</pre>
+<h3>Feladatok</h3>
+<ul>
+{% for task in project.tasks %}
+        
+        <li class="list-group-item">
+          <a href="/projects/{{ project.id }}/{{task.id }}">  
+            {{ task.name }}
+           </a> 
+        </li>
+{% endfor %}
+</ul>
+{% if (project.user_id == currentUser.id) %}
+<a href="/projects/{{ project.id }}/log" class="btn btn-default">
+    Loggol
+</a>
+{% endif %}
+{% if canLog %}
+<a href="/projects/{{ project.id }}/log" class="btn btn-default">
+    Loggol
+</a>
+{% endif %}
+{% if (project.user_id == currentUser.id) %}
+<a href="/projects/{{ project.id }}/create" class="btn btn-default">
+    Új feladat
+</a>
+<a href="/projects/{{ project.id }}/edit" class="btn btn-default">
+    Szerkeszt
+</a>
+<a href="/projects/{{ project.id }}/users" class="btn btn-default">
+    Résztvevők módosítása
+</a>
+<a href="/projects/{{ project.id }}/delete" class="btn btn-danger">
+    Töröl
+</a>
+{% endif %}
+
+<ul>
+<h3>Logs</h3>
+</br>
+{% for log in project.logs %}
+        
+        <li class="list-group-item">
+          Órák: {{ log.hours}} | Leírás: {{log.description}} | User: {{log.user_id }}  | Feladat: {{log.task_id }}
+        </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

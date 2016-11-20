@@ -1,0 +1,13 @@
+{
+    "sqlite": {
+        "database": "database/data.sqlite"
+    },
+    "server": {
+        "port": 4444
+    },
+    "app": {
+        "layouts": true,
+        "themes": true,
+        "languages": true
+    }
+}

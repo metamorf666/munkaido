@@ -1,0 +1,41 @@
+{% extends "layout" %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+<h1>Résztvevők:</h1>
+<div class="row">
+  {% for user in task.users %}
+  
+  <div class="col-lg-2 col-md-6 col-sm-12">
+    <div class="panel panel-primary">
+      
+      <div class="panel-heading">
+            {{ user.firstname }}  {{ user.lastname }}
+      </div>
+       <ul class="list-group">
+       
+        <li class="list-group-item">
+            <a href="/projects/{{ project.id }}/{{ task.id}}/users/{{user.id}}/delete" class="btn-sm btn-danger">
+                Eltávolít
+            </a>
+        </li>
+      </ul>
+    </div>
+ 
+  </div>
+  {% endfor %}
+  
+
+</div>
+   {% if (project.user_id == currentUser.id) %}
+<a href="/projects/{{ project.id }}/{{task.id}}/users/add" class="btn btn-default">
+    Új résztvevő
+</a>
+{% endif %}
+
+
+
+
+{% endblock %}

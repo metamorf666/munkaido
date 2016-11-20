@@ -1,0 +1,34 @@
+{% extends "layout" %}
+
+{% block scripts %}
+<script src="/scripts/main.js"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Projektjeim:</h1>
+<div class="row">
+  {% for project in projects %}
+  
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="panel panel-primary">
+      
+      <div class="panel-heading">
+        <a href="/projects/{{ project.id}}">
+            {{ project.name }}
+        </a>
+      </div>
+       <ul class="list-group">
+        {% for task in project.tasks %}
+        <li class="list-group-item">
+           <a href="/projects/{{ project.id}}/{{task.id }}">
+            {{ task.name }}
+        </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% endblock %}
