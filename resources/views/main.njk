@@ -10,15 +10,26 @@
   {% for project in projects %}
   <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="panel panel-primary">
-      <div class="panel-heading"><a href="/projects/{{ project.id}}">
+      <div class="panel-heading">
+       {% if currentUser %}
+      <a href="/projects/{{ project.id}}">
+      {% endif %}
+
             {{ project.name }}
-        </a></div>
+             {% if currentUser %}
+        </a>
+        {% endif %}
+        </div>
       <ul class="list-group">
         {% for task in project.topTasks %}
         <li class="list-group-item">
+         {% if currentUser %}
            <a href="/projects/{{ project.id}}/{{task.id }}">
+           {% endif %}
             {{ task.name }}
+             {% if currentUser %}
         </a>
+         {% endif %}
         </li>
         {% endfor %}
       </ul>

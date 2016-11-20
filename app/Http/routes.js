@@ -33,16 +33,16 @@ Route.post('/projects/:id/:id2/log', 'LogController.doTaskLog').middleware('auth
 Route.get('/projects/:id/:id2/edit', 'LogController.taskEdit').middleware('auth')
 Route.post('/projects/:id/:id2/edit', 'LogController.taskDoEdit').middleware('auth')
 Route.get('/projects/:id/:id2/delete', 'LogController.doTaskDelete').middleware('auth')
-Route.get('/projects/:id', 'LogController.projectShow')
+Route.get('/projects/:id', 'LogController.projectShow').middleware('auth')
 
-Route.get('/ownprojects', 'LogController.ownProjectShow')
-Route.get('/ownuserprojects', 'LogController.ownUserProjectShow')
+Route.get('/ownprojects', 'LogController.ownProjectShow').middleware('auth')
+Route.get('/ownuserprojects', 'LogController.ownUserProjectShow').middleware('auth')
 
 
-Route.get('/projects/:id/:id2', 'LogController.taskShow')
+Route.get('/projects/:id/:id2', 'LogController.taskShow').middleware('auth')
 
-Route.get('/addUser', 'UserController.register')
+Route.get('/addUser', 'UserController.register').middleware('auth')
 Route.get('/login', 'UserController.login')
-Route.post('/addUser', 'UserController.doRegister')
+Route.post('/addUser', 'UserController.doRegister').middleware('auth')
 Route.post('/login', 'UserController.doLogin')
 Route.get('/logout', 'UserController.doLogout')

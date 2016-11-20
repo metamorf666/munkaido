@@ -1,5 +1,11 @@
 # Munkaidő nyilvántartó
 
+### Telepítés
+ - git clone
+ - npm i 
+ - admin belépés: admin@admin.hu:admin
+ - expressadmin: a:aaAA11
+
 ### Funkcionális követelmények:
 - Fejlesztőként szeretnék tudni bejelentkezni az oldalra
 - Fejlesztőként szeretném a hozzám rendelt projekteket, taskokat megtekinteni.
