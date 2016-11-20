@@ -187,3 +187,52 @@ Admin
 ```
 
 ![Adatmodell](docs/data_model.png)
+
+
+
+### Designtervek (végső megvalósítás kinézete):
+
+**Főoldal**
+![](docs/images/design/fooldal.png)
+
+**Felhasználó hozzáadása oldal**
+![](docs/images/design/addUser.jpg)
+
+**Bejelentkező oldal**
+![](docs/images/design/login-png.png)
+
+**Saját project**
+![](docs/images/design/ownProject.png)
+
+**Project oldal,logok, törlés**
+![](docs/images/design/projectLogs.png)
+
+**Project módosítása**
+![](docs/images/design/editProjekt.png)
+
+**Új feladat/task**
+![](docs/images/design/task.png)
+
+**Feladat/task módosítása**
+![](docs/images/design/taskEdit.png)
+
+**Logolás**
+![](docs/images/design/log.png)
+
+**Felhasználó hozzárendelése**
+![](docs/images/design/attach.png)
+
+**Hozzárendelt felhasználók, felhasználó eltávolítása**
+![](docs/images/design/attached.png)
+
+**Új projekt felvétele**
+![](docs/images/design/newProject.jpg)
+
+**Koktél megtekintése**
+![](docs/images/design/id-design.jpg)
+ 
+### Fejlesztőkörnyezet:
+
+* Visual Studio Code
+* Node
+* Github
