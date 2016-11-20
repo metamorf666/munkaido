@@ -77,6 +77,54 @@
 
 
 
+### Folyamatok meghatározása
+
+
+- Projekt vezető
+    + új projekt felvételének folyamata
+
+        ```
+       #direction: right
+        [<start>start] -> [<state>új projekt felvétele]
+        [<state>új projekt felvétele] -> [<choice>megfelelő?]
+        [<choice>megfelelő?] nem-> [<state>új projekt felvétele]
+        [<choice>megfelelő?] igen-> [<end>end]
+        ```
+    
+        ![Új projekt felvétele folyamata](docs/new_project.png)
+
+    + bejelentkezés folyamata
+
+        ```
+        #direction: right
+        [<start>start] -> [<state>főoldal]
+        [<state>főoldal] -> [<state>bejelentkezés]
+        [<state>bejelentkezés] -> [<choice>sikeres?]
+        [<choice>sikeres?] nem-> [<state>bejelentkezés]
+        [<choice>sikeres?] igen-> [<end>end]
+    
+        ```
+
+        ![Bejelentkezés](docs/login.png)
+
+    + felhasználó hozzárendelése projekthez folyamata
+
+        ```
+        #direction: right
+        [<start>start] -> [<state>főoldal]
+        [<state>főoldal] -> [<state>Saját projektek]
+        [<state>Saját projektek] -> [<state>Projekt választása]
+        [<state>Projekt választása]-> [<state>Résztvevők módosítása]
+        [<state>Résztvevők módosítása]-> [<state>Új résztvevő]
+    	[<state>Új résztvevő]-> [<state>hozzáadás]
+        [<state>hozzáadás] -> [<end>end]
+    
+        ```
+
+        ![Bejelentkezés](docs/attachUser.png)        
+
+        
+
 ### Sitemap
 
 Publikus:
@@ -156,6 +204,7 @@ Admin
 
 ```
 [User|
+  id
   username
   firstname
   lastname
@@ -166,24 +215,49 @@ Admin
 ]
 
 [Task|
+  id
   name
   description
   project_id
 ]
 
 [Project|
+  id
   name
   description
   user_id
 ]
 
 [Log|
+  id
   name
   description
   user_id
   project_id
   task_id
 ]
+
+[project_user|
+  id
+  user_id
+  project_id
+]
+
+[task_user|
+  id
+  user_id
+  project_id
+]
+
+
+[User] 1 - 0..* [task_user]
+[User] 1 - 0..* [project_user]
+[Task] 1 - 0..* [task_user]
+[Project] 1 - 0..* [project_user]
+[Project] 1 - 1 [User]
+[User] 1 - 0..* [Log]
+[Task] 1 - 0..* [Log]
+[Project] 1 - 0..* [Log]
 ```
 
 ![Adatmodell](docs/data_model.png)
@@ -208,28 +282,28 @@ Admin
 ![](docs/images/design/projectLogs.png)
 
 **Project módosítása**
-![](docs/images/design/editProjekt.png)
+![](docs/design/editProjekt.png)
 
 **Új feladat/task**
-![](docs/images/design/task.png)
+![](docs/design/task.png)
 
 **Feladat/task módosítása**
-![](docs/images/design/taskEdit.png)
+![](docs/design/taskEdit.png)
 
 **Logolás**
-![](docs/images/design/log.png)
+![](docs/design/log.png)
 
 **Felhasználó hozzárendelése**
-![](docs/images/design/attach.png)
+![](docs/design/attach.png)
 
 **Hozzárendelt felhasználók, felhasználó eltávolítása**
-![](docs/images/design/attached.png)
+![](docs/design/attached.png)
 
 **Új projekt felvétele**
-![](docs/images/design/newProject.jpg)
+![](docs/design/newProject.jpg)
 
 **Koktél megtekintése**
-![](docs/images/design/id-design.jpg)
+![](docs/design/id-design.jpg)
  
 ### Fejlesztőkörnyezet:
 
