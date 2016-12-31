@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,8 +24,8 @@
     {% block styles %}{% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
+    <nav class="navbar navbar-default" >
+      <div class="container-fluid" id="navbar">
           <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
               <span class="sr-only">Toggle navigation</span>
@@ -39,6 +44,7 @@
               {% if currentUser.isLeader==false %}
               {% if currentUser.isAdmin==false %}
               <li><a href="/ownuserprojects">Projektjeim</a></li>
+               <li><a href="/assignedTasks">Taskjaim</a></li>
               {% endif %}
               {% endif %}
               {% if currentUser.isLeader %}
@@ -46,7 +52,7 @@
               <li><a href="/projects/create">Új project</a></li>
               {% endif %}
               {% if currentUser.isAdmin %}
-              <li><a href="/addUser">Felhasználó hozzáadása</a></li>
+              <li id="btnAddUser"><a href="/addUser">Felhasználó hozzáadása</a></li>
               {% endif %}
           </ul>
           
@@ -55,7 +61,7 @@
               <li class="navbar-text">Üdv, {{ currentUser.username }}!</li>
               <li><a href="/logout">Kilépés</a></li>
             {% else %}
-              <li><a href="/login">Belépés</a></li>
+              <li><a href="/login" id="btnLogin">Belépés</a></li>
             {% endif %}
           </ul>
           </div>
@@ -71,7 +77,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+  
     {% block scripts %}{% endblock %}
   </body>
 </html>

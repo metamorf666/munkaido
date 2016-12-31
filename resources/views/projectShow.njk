@@ -1,6 +1,14 @@
 {% extends "layout" %}
 
+
+{% block scripts %}
+<script src="/scripts/deleteProject.js"></script>
+<script src="/scripts/popup_log.js"></script>
+{% endblock %}
+
+
 {% block content %}
+{{ csrfField | safe }}
 <h2>{{ project.name }}</h2>
 <h3>Vezető</h3>
 <pre>
@@ -22,12 +30,12 @@
 {% endfor %}
 </ul>
 {% if (project.user_id == currentUser.id) %}
-<a href="/projects/{{ project.id }}/log" class="btn btn-default">
+<a href="/projects/{{ project.id }}/log" class="btn btn-default" id="btnLog">
     Loggol
 </a>
 {% endif %}
 {% if canLog %}
-<a href="/projects/{{ project.id }}/log" class="btn btn-default">
+<a href="/projects/{{ project.id }}/log" class="btn btn-default" id="btnLog">
     Loggol
 </a>
 {% endif %}
@@ -41,12 +49,12 @@
 <a href="/projects/{{ project.id }}/users" class="btn btn-default">
     Résztvevők módosítása
 </a>
-<a href="/projects/{{ project.id }}/delete" class="btn btn-danger">
+<a href="/projects/{{ project.id }}/delete" class="btn btn-danger" id="btnProjectDelete">
     Töröl
 </a>
 {% endif %}
 
-<ul>
+<ul id="logUl">
 <h3>Logs</h3>
 </br>
 {% for log in project.logs %}
@@ -56,5 +64,22 @@
         </li>
 {% endfor %}
 </ul>
+
+
+<span class="help-block"></span>
+
+<div class="modal fade confirm-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+            Biztosan törölni szeretnéd?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success modal-ok" data-dismiss="modal">OK</button>
+            <button type="button" class="btn btn-danger modal-cancel" data-dismiss="modal">Mégse</button>
+        </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

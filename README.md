@@ -314,3 +314,15 @@ Admin
 * Visual Studio Code
 * Node
 * Github
+
+
+
+### Kliensoldali JavaScript :
+
+## Project törlése ajax segítégével:
+- Érintett fájlok:
+    + resources/views/projectShow.njk
+    + public/scripts/deleteProject.js
+    + app/Http/routes.js
+    + app/Http/Controllers/LogController.js/ajaxProjectDelete
+-Működés: A törlés gomb megnyomására, a deleteProject.js-ben lévő javascript megjelenít egy megerősítő popupot, majd az ok gomb megnyomására elküld egy XMLHttpRequest-et az ajacProjectDelete controllernek, amely kitörli a megfelelő projektet, majd sikeres jelzést küld vissza, aminek hatására, a javascript átirányítja a felhasználót.  

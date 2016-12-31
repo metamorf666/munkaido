@@ -1,14 +1,17 @@
 {% extends "layout" %}
 
 {% block scripts %}
+<script src="/scripts/assignUser.js"></script>
 {% endblock %}
 
+
 {% block content %}
+{{ csrfField | safe }}
 <h1>Felhasználók:</h1>
 <div class="row">
   {% for user in users %}
   
-  <div class="col-lg-2 col-md-6 col-sm-12">
+  <div class="col-lg-2 col-md-6 col-sm-12 userRow">
     <div class="panel panel-primary">
       
       <div class="panel-heading">
@@ -17,7 +20,7 @@
        <ul class="list-group">
        
         <li class="list-group-item">
-            <a href="/projects/{{ project.id }}/{{task.id}}/users/add/{{user.id}}" class="btn-sm btn-default">
+            <a href="/projects/{{ project.id }}/{{task.id}}/users/add/{{user.id}}" class="btn-sm btn-default assign">
                 Hozzáadás
             </a>
         </li>

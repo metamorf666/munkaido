@@ -28,6 +28,12 @@ class LogController {
 * showProjectUsers(request, response) {
     // const categories = yield Database.from('categories').select('*');
     // response.send(categories)
+    if (!request.currentUser.isLeader) {
+      response.unauthorized('Access denied.')
+      return
+    }
+
+
     const id = request.param('id');
     const project = yield Project.find(id);
     yield project.related('users').load();
@@ -40,6 +46,11 @@ class LogController {
   * showTaskUsers(request, response) {
     // const categories = yield Database.from('categories').select('*');
     // response.send(categories)
+    if (!request.currentUser.isLeader) {
+      response.unauthorized('Access denied.')
+      return
+    }
+
     const id = request.param('id');
     const id2 = request.param('id2');
     const project = yield Project.find(id);
@@ -54,11 +65,20 @@ class LogController {
 
 
   * projectCreate (request, response) {
+    if (!request.currentUser.isLeader) {
+      response.unauthorized('Access denied.')
+      return
+    }
+
     yield response.sendView('projectCreate', {
     });
   }
 
   * projectDoCreate (request, response) {
+    if (!request.currentUser.isLeader) {
+      response.unauthorized('Access denied.')
+      return
+    }
     const projectData = request.except('_csrf');
 
     const rules = {
@@ -81,15 +101,24 @@ class LogController {
     projectData.user_id = request.currentUser.id
     const project = yield Project.create(projectData)
     // response.send(recipe.toJSON())
-    response.redirect('/')
+    response.redirect('/projects/'+project.id)
   }
 
   * taskCreate (request, response) {
+    if (!request.currentUser.isLeader) {
+      response.unauthorized('Access denied.')
+      return
+    }
+
     yield response.sendView('taskCreate', {
     });
   }
 
   * taskDoCreate (request, response) {
+    if (!request.currentUser.isLeader) {
+      response.unauthorized('Access denied.')
+      return
+    }
     const id = request.param('id');
     const projectData = request.except('_csrf');
     const rules = {
@@ -112,7 +141,7 @@ class LogController {
     projectData.project_id = id;
     const task = yield Task.create(projectData)
     // response.send(recipe.toJSON())
-    response.redirect('/')
+    response.redirect('/projects/'+id+'/'+task.id)
   }
 
   * projectEdit (request, response) {
@@ -153,13 +182,18 @@ class LogController {
 
     const id = request.param('id');
     const project = yield Project.find(id);
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
+
 
     project.name = projectData.name;
     project.description = projectData.description; 
 
     yield project.save()
     
-    response.redirect('/')
+    response.redirect('/projects/'+project.id)
   }
 
 
@@ -168,6 +202,11 @@ class LogController {
     const id = request.param('id');
     const task = yield Task.find(id2);
     const project = yield Project.find(id);
+if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
+
     // console.log(recipe.toJSON())
 
     if (request.currentUser.id !== project.user_id) {
@@ -209,7 +248,7 @@ class LogController {
 
     yield task.save()
     
-    response.redirect('/')
+    response.redirect('/projects/'+task.project_id+"/"+task.id)
   }
 
   * projectShow (request, response) {
@@ -243,10 +282,31 @@ class LogController {
     const id2 = request.param('id2');
     const project = yield Project.find(id);
     const user = yield User.find(id2)
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
+    
 
     yield project.users().attach([user.id]);
 
     response.redirect('back')
+  }
+
+
+  * ajaxProjectAddUser (request, response) {
+    const id = request.param('id');
+    const id2 = request.param('id2');
+    const project = yield Project.find(id);
+    const user = yield User.find(id2)
+if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
+    yield project.users().attach([user.id]);
+
+    response.send ({ success: true })
+      return
   }
 
   * doProjectDeleteUser (request, response) {
@@ -254,17 +314,38 @@ class LogController {
     const id2 = request.param('id2');
     const project = yield Project.find(id);
     const user = yield User.find(id2)
-
+if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
     yield project.users().detach([user.id]);
 
     response.redirect('back')
+  }
+
+  * ajaxProjectDeleteUser (request, response) {
+    const id = request.param('id');
+    const id2 = request.param('id2');
+    const project = yield Project.find(id);
+    const user = yield User.find(id2)
+if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
+    yield project.users().detach([user.id]);
+
+     response.send ({ success: true })
+      return
   }
 
   * projectAddUser (request, response) {
     const id = request.param('id');
     const project = yield Project.find(id);
     yield project.related('users').load();
-    
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
    
    // fixme
     const users2 = [];
@@ -293,6 +374,10 @@ class LogController {
     const id2 = request.param('id2');
     const id3 = request.param('id3');
     const project = yield Project.find(id);
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
     const user = yield User.find(id2)
     const task = yield Task.find(id3);
     yield task.users().attach([user.id]);
@@ -300,11 +385,32 @@ class LogController {
     response.redirect('back')
   }
 
+   * ajaxTaskAddUser (request, response) {
+    const id = request.param('id');
+    const id2 = request.param('id2');
+    const id3 = request.param('id3');
+    const project = yield Project.find(id);
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
+    const user = yield User.find(id2)
+    const task = yield Task.find(id3);
+    yield task.users().attach([user.id]);
+    
+     response.send ({ success: true })
+      return
+  }
+
   * doTaskDeleteUser (request, response) {
     const id = request.param('id');
     const id2 = request.param('id2');
     const id3 = request.param('id3');
     const project = yield Project.find(id);
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
     const user = yield User.find(id2)
     const task = yield Task.find(id3);
     yield task.users().detach([user.id]);
@@ -312,11 +418,32 @@ class LogController {
     response.redirect('back')
   }
 
+  * ajaxTaskDeleteUser (request, response) {
+    const id = request.param('id');
+    const id2 = request.param('id2');
+    const id3 = request.param('id3');
+    const project = yield Project.find(id);
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
+    const user = yield User.find(id2)
+    const task = yield Task.find(id3);
+    yield task.users().detach([user.id]);
+
+     response.send ({ success: true })
+      return
+  }
+
   * taskAddUser (request, response) {
     const id = request.param('id');
     const id3 = request.param('id3');
     const task = yield Task.find(id3);
     const project = yield Project.find(id);
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
     yield task.related('users').load();
     
    
@@ -374,6 +501,18 @@ class LogController {
 
   }
 
+  * assignedTasks (request, response) {
+    
+
+    const id = request.currentUser.id;
+    const user = yield User.find(id);
+    yield user.related('tasks').load();
+    yield response.sendView('assignedTasks', {
+      tasks: user.toJSON()
+    })  
+
+  }
+
   
 
   * taskShow (request, response) {
@@ -413,17 +552,52 @@ class LogController {
     response.redirect('/')
   }
 
-  * doTaskDelete (request, response) {
+  * ajaxProjectDelete (request, response) {
     const id = request.param('id');
-    const project = yield Task.find(id);
+    const project = yield Project.find(id);
 
-    if (request.currentUser.id !== project.leader) {
-      response.unauthorized('Access denied.')
+    if (request.currentUser.id !== project.user_id) {
+      response.send({ success: false });
       return
     }
 
     yield project.delete()
-    response.redirect('back')
+    response.send ({ success: true })
+      return
+  }
+
+
+  * doTaskDelete (request, response) {
+    const id = request.param('id');
+    const project = yield Project.find(id);;
+
+    const id2 = request.param('id2');
+    const task = yield Task.find(id2);
+
+    if (request.currentUser.id !== project.user_id) {
+      response.unauthorized('Access denied.')
+      return
+    }
+
+    yield task.delete()
+    response.redirect('/projects/'+project.id)
+  }
+
+  * ajaxTaskDelete (request, response) {
+    const id = request.param('id');
+    const project = yield Project.find(id);
+
+    const id2 = request.param('id2');
+    const task = yield Task.find(id2);
+
+    if (request.currentUser.id != project.user_id) {
+      response.send ({ success: false })
+      return
+    }
+
+    yield task.delete()
+    response.send ({ success: true })
+      return
   }
 
   * taskLog (request, response) {
@@ -464,6 +638,40 @@ class LogController {
     response.redirect('/projects/'+project.id)
   }
 
+    * ajaxTaskLog (request, response) {
+    const id = request.param('id');
+    const id2 = request.param('id2');
+    const project = yield Project.find(id);
+    const task = yield Task.find(id2);
+
+    const logData = request.except('_csrf');
+    const rules = {
+      hours: 'required|number',
+
+    };
+
+    const validation = yield Validator.validateAll(logData, rules)
+
+/*
+    if (validation.fails()) {
+      yield request
+        .withAll()
+        .andWith({errors: validation.messages()})
+        .flash()
+      response.redirect('back')
+      return
+    }
+    */
+
+    logData.project_id = id;
+    logData.user_id = request.currentUser.id;
+    logData.task_id = id2;
+    const log = yield Log.create(logData)
+    // response.send(recipe.toJSON())
+    response.send ({ success: true })
+      return
+  }
+
     * projectLog (request, response) {
     yield response.sendView('logCreate', {
     });
@@ -496,6 +704,36 @@ class LogController {
     const log = yield Log.create(logData)
     // response.send(recipe.toJSON())
     response.redirect('/projects/'+project.id)
+  }
+
+    * ajaxProjectLog (request, response) {
+    const id = request.param('id');
+    const project = yield Project.find(id);
+
+    const logData = request.except('_csrf');
+    const rules = {
+      hours: 'required|number'
+    };
+    
+    logData.user_id = request.currentUser.id;
+    logData.project_id = id;
+    const validation = yield Validator.validateAll(logData, rules)
+/*
+    if (validation.fails()) {
+      yield request
+        .withAll()
+        .andWith({errors: validation.messages()})
+        .flash()
+      response.redirect('back')
+      return
+    }
+*/
+  
+    
+    const log = yield Log.create(logData)
+    // response.send(recipe.toJSON())
+    response.send ({ success: true })
+      return
   }
 
 

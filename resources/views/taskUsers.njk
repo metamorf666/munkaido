@@ -1,6 +1,7 @@
 {% extends "layout" %}
 
 {% block scripts %}
+<script src="/scripts/unassignUser.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +18,7 @@
        <ul class="list-group">
        
         <li class="list-group-item">
-            <a href="/projects/{{ project.id }}/{{ task.id}}/users/{{user.id}}/delete" class="btn-sm btn-danger">
+            <a href="/projects/{{ project.id }}/{{ task.id}}/users/{{user.id}}/delete" class="btn-sm btn-danger unassign">
                 Eltávolít
             </a>
         </li>
