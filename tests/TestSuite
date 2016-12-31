@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="AdminLogin.html">AdminLogin</a></td></tr>
+<tr><td><a href="AdminAddUser.html">AdminAddUser</a></td></tr>
+<tr><td><a href="Kilep.html">Kilep</a></td></tr>
+<tr><td><a href="LeaderLogin.html">LeaderLogin</a></td></tr>
+<tr><td><a href="LeaderNewProject.html">LeaderNewProject</a></td></tr>
+<tr><td><a href="LeaderNewTask.html">LeaderNewTask</a></td></tr>
+<tr><td><a href="LeaderAssign.html">LeaderAssign</a></td></tr>
+<tr><td><a href="LeaderUnsassign.html">LeaderUnassign</a></td></tr>
+<tr><td><a href="LeaderAssignForWorkerTest.html">LeaderAssignForWorkerTest</a></td></tr>
+<tr><td><a href="WorkerLogin.html">WorkerLogin</a></td></tr>
+<tr><td><a href="WorkerLog.html">WorkerLog</a></td></tr>
+</tbody></table>
+</body>
+</html>
