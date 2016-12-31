@@ -319,10 +319,84 @@ Admin
 
 ### Kliensoldali JavaScript :
 
-## Project törlése ajax segítégével:
+## Project törlése megerősítés után ajax segítégével:
 - Érintett fájlok:
     + resources/views/projectShow.njk
     + public/scripts/deleteProject.js
     + app/Http/routes.js
     + app/Http/Controllers/LogController.js/ajaxProjectDelete
--Működés: A törlés gomb megnyomására, a deleteProject.js-ben lévő javascript megjelenít egy megerősítő popupot, majd az ok gomb megnyomására elküld egy XMLHttpRequest-et az ajacProjectDelete controllernek, amely kitörli a megfelelő projektet, majd sikeres jelzést küld vissza, aminek hatására, a javascript átirányítja a felhasználót.  
+- Működés: A törlés gomb megnyomására, a deleteProject.js-ben lévő javascript megjelenít egy megerősítő popupot, majd az ok gomb megnyomására elküld egy XMLHttpRequest-et az ajaxProjectDelete controllernek, amely kitörli a megfelelő projektet, majd sikeres jelzést küld vissza, aminek hatására, a javascript átirányítja a felhasználót.  
+
+## Task törlése megerősítés után ajax segítégével:
+- Érintett fájlok:
+    + resources/views/tasktShow.njk
+    + public/scripts/deleteTask.js
+    + app/Http/routes.js
+    + app/Http/Controllers/LogController.js/ajaxTaskDelete
+- Működés: A törlés gomb megnyomására, a deleteTask.js-ben lévő javascript megjelenít egy megerősítő popupot, majd az ok gomb megnyomására elküld egy XMLHttpRequest-et az ajaxProjectDelete controllernek, amely kitörli a megfelelő projektet, majd sikeres jelzést küld vissza, aminek hatására, a javascript átirányítja a felhasználót. 
+
+## Hozzárendelés task/project-hez ajax segítségével:
+- Érintett fájlok:
+    + resources/views/projectAddUsers.njk
+    + resources/views/taskAddUser.njk
+    + public/scripts/assignUser.js
+    + app/Http/routes.js
+    + app/Http/Controllers/LogController.js/ajaxTaskAddUser
+    + app/Http/Controllers/LogController.js/ajaxProjectAddUser
+- Működés: A hozzáadás gomb megnyomására, az assignUser-ben lévő javascript egy XMLHttpRequest-et küld az ajaxTaskAddUser/ajaxProjectAddUser controllernek, amely hozzárendeli a megfelelő dolgozót a project/task-hoz, majd sikeres jelzést küld vissza, aminek hatására, a javascript frissíti a DOM-ot, eltávolítja a hozzáadott dolgozót a listáról.
+
+## Dolgozó eltávolítása task/project-ről ajax segítségével:
+- Érintett fájlok:
+    + resources/views/projectUsers.njk
+    + resources/views/taskUsers.njk
+    + public/scripts/unassignUser.js
+    + app/Http/routes.js
+    + app/Http/Controllers/LogController.js/ajaxTaskDeleteUser
+    + app/Http/Controllers/LogController.js/ajaxProjectDeleteUser
+- Működés: A törlés gomb megnyomására, az assignUser-ben lévő javascript egy XMLHttpRequest-et küld az ajaxTaskDeleteUser/ajaxProjectDeleteUser controllernek, amely hozzárendeli a megfelelp dolgozót a project/task-hoz, majd sikeres jelzést küld vissza, aminek hatására, a javascript frissíti a DOM-ot, eltávolítja a törölt dolgozót a listáról.
+- Szekvenciadiagram(project-ről):
+
+        WebSequenceDiagram
+
+        ```
+        HTMLPage->Javascript: onclick esemény
+        Javascript->XMLHttpRequest:<<létrehoz>>
+        Javascript->XMLHttpRequest:url=/ajax/projects/:id/users/:id2/delete
+        Javascript->XMLHttpRequest:callback függvény beállítása
+        XMLHttpRequest->ajaxProjectDeleteUser:delete /ajax/projects/:id/users/:id2/delete
+        ajaxProjectDeleteUser->XMLHttpRequest:Siker
+        XMLHttpRequest->Javascript:Callback függvény hívása
+        Javascript->HTMLPage: DOM frissítése
+    
+        ```
+
+        ![Dolgozó törlése project-ről](docs/deleteUserProjectSequence.png) 
+
+## Bejelentkezés modal-al ajax segítségével:
+- Érintett fájlok:
+    + resources/views/main.njk
+    + resources/views/layout.njk
+    + public/scripts/popup_login.js
+    + app/Http/routes.js
+    + app/Http/Controllers/UserController.js/ajaxLogin
+- Működés: A bejelntkezés gomb megnyomására, a popup_login.js-ben lévő javascript megjelenít egy modalt, amely tartlamazza a belépés form-ját, a küldés gomb megnyomására elküld egy XMLHttpRequest-et az ajaxLogin controllernek, amely megpróbálja beléptteni a felhasználót, és sikeres/sikertelen jelzést küld vissza attól függően, hogy sikerült-e. A javascript ennek hatására frissíti a DOM-ot, sikertelen jelzés esetén hobát jelez, sikeres esetén pedig bezárja a modal-t, és frissíti a navigációs menüt.   
+
+## Kliens oldali validálás bootsrap validator segítségével felhasználó hozzáadásánál:
+- Érintett fájlok:
+    + resources/views/register.njk
+- Működés: Validálás bootsrap validator segítségével, az alábbi validálásokat tartalmazza:
+    + Minden szükséges
+    + Jelszó minimum 6 karakter
+    + Jelsző megerősítésnek meg kell egyezni a jelszóval
+    + Email-nek helyes fórmátumunak kell lennie.
+- Ha ezek teljseülnek, aktívvá válik a küldés gomb.      
+
+## Logolás project/task-hoz modal és ajax segítségével:
+- Érintett fájlok:
+    + resources/views/projectShow.njk
+    + resources/views/taskShow.njk
+    + public/scripts/popup_log.js
+    + app/Http/routes.js
+    + app/Http/Controllers/LogController.js/ajaxTaskLog
+    + app/Http/Controllers/LogController.js/ajaxProjectLog
+- Működés: A Loggol gomb megnyomására, a popup_log.js-ben lévő javascript megjelenít egy modalt, amely tartlamazza a log form-ját, a küldés gomb megnyomására elküld egy XMLHttpRequest-et az ajaxTaskLog/ajaxProjectLog controllernek, amely hozzáadja az adatbázishoz a logot majd sikeres jelzést küld. A javascript ennek hatására frissíti a DOM-ot, bezárja a modalt és frissíti a logok listáját.
