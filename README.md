@@ -433,7 +433,7 @@ Admin
 
 
 ## Javítások első részhez:
-- Autorizáció kiegészítése, ellenőrzése, hogy van.e joga az adott műelethez(Vezető,Admin-e).
+- Autorizáció kiegészítése: ellenőrzése, hogy vanee joga az adott műelethez(Vezető-e, Adott projekt vezetője-e,Admin-e).
 - Átirányítások: Project,Task léterhozása után, nem a főoldalra, hanem a kreált task/project-hez visz.
 - Task törlés javítása: Törlés eddig nem volt működőképes.
 - Új végpont : - `GET /assignedTasks`: A dolgozóhoz rendelt taskokat tartalmazza.
