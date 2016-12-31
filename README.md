@@ -370,7 +370,7 @@ Admin
     
         ```
 
-        ![Dolgozó törlése project-ről](docs/deleteUserProjectSequence.png) 
+![Dolgozó törlése project-ről](docs/deleteUserProjectSequence.png) 
 
 #### Bejelentkezés modal-al ajax segítségével:
 - Érintett fájlok:
@@ -410,11 +410,11 @@ Admin
     + Selenium IDE telepítése kiegészítőként: https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
 
 - Tesztek futtatása:
-- 2 féle módszer:
-    + Tesztek egyenként való importálása:
-        + File/Open: Megnyitja a kiválasztott selenium tesztet.
-    + Test Suite importálása:
-        + File/Open New Test Suite : Ez megnyitja a test suitot, amely egy összefüggő tesztsorozatot tartalmaz.
+    + 2 féle módszer:
+        + Tesztek egyenként való importálása:
+            + File/Open: Megnyitja a kiválasztott selenium tesztet.
+        + Test Suite importálása:
+            + File/Open New Test Suite : Ez megnyitja a test suitot, amely egy összefüggő tesztsorozatot tartalmaz.Egész test suite könnyen futtatható Actions/Play Entire Test Suite segítségével
 
 - Test Suite tartalma, a teszt esetek külön fájlokban is megtalálhatók:
     + AdminLogin : Bejelentkezik admin felhasználóbal(Feltételez admin@admin.hu:admin felhasználót)
@@ -428,8 +428,8 @@ Admin
     + LeaderAssignForWorkerTest(Feltételez legalább egy felhasználót, Project123 projektet,Task123 taskot): Hozzárendel egy felhasználót a worker teszthez.
     + WorkerLogin : Belépés dolgozóval(Feltételez worker@worker.hu:worker felhasználót)
     + WorkerLog:(Felttelezi hogy hozzávan rendelve Task123-hoz):Időt logol egy task-hoz.
-- Helyes lefutás esetén hasonlót kell látnunk(Egész test suite könnyen futtatható Actions/Play Entire Test Suite segítségével):
-    ![Success](docs/Testok.png) 
+- Helyes lefutás esetén hasonlót kell látnunk:
+    ![Success](docs/testok.png) 
 
 
 
