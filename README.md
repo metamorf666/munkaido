@@ -319,7 +319,7 @@ Admin
 
 ### Kliensoldali JavaScript :
 
-## Project törlése megerősítés után ajax segítégével:
+#### Project törlése megerősítés után ajax segítégével:
 - Érintett fájlok:
     + resources/views/projectShow.njk
     + public/scripts/deleteProject.js
@@ -327,7 +327,7 @@ Admin
     + app/Http/Controllers/LogController.js/ajaxProjectDelete
 - Működés: A törlés gomb megnyomására, a deleteProject.js-ben lévő javascript megjelenít egy megerősítő popupot, majd az ok gomb megnyomására elküld egy XMLHttpRequest-et az ajaxProjectDelete controllernek, amely kitörli a megfelelő projektet, majd sikeres jelzést küld vissza, aminek hatására, a javascript átirányítja a felhasználót.  
 
-## Task törlése megerősítés után ajax segítégével:
+#### Task törlése megerősítés után ajax segítégével:
 - Érintett fájlok:
     + resources/views/tasktShow.njk
     + public/scripts/deleteTask.js
@@ -335,7 +335,7 @@ Admin
     + app/Http/Controllers/LogController.js/ajaxTaskDelete
 - Működés: A törlés gomb megnyomására, a deleteTask.js-ben lévő javascript megjelenít egy megerősítő popupot, majd az ok gomb megnyomására elküld egy XMLHttpRequest-et az ajaxProjectDelete controllernek, amely kitörli a megfelelő projektet, majd sikeres jelzést küld vissza, aminek hatására, a javascript átirányítja a felhasználót. 
 
-## Hozzárendelés task/project-hez ajax segítségével:
+#### Hozzárendelés task/project-hez ajax segítségével:
 - Érintett fájlok:
     + resources/views/projectAddUsers.njk
     + resources/views/taskAddUser.njk
@@ -345,7 +345,7 @@ Admin
     + app/Http/Controllers/LogController.js/ajaxProjectAddUser
 - Működés: A hozzáadás gomb megnyomására, az assignUser-ben lévő javascript egy XMLHttpRequest-et küld az ajaxTaskAddUser/ajaxProjectAddUser controllernek, amely hozzárendeli a megfelelő dolgozót a project/task-hoz, majd sikeres jelzést küld vissza, aminek hatására, a javascript frissíti a DOM-ot, eltávolítja a hozzáadott dolgozót a listáról.
 
-## Dolgozó eltávolítása task/project-ről ajax segítségével:
+#### Dolgozó eltávolítása task/project-ről ajax segítségével:
 - Érintett fájlok:
     + resources/views/projectUsers.njk
     + resources/views/taskUsers.njk
@@ -372,7 +372,7 @@ Admin
 
         ![Dolgozó törlése project-ről](docs/deleteUserProjectSequence.png) 
 
-## Bejelentkezés modal-al ajax segítségével:
+#### Bejelentkezés modal-al ajax segítségével:
 - Érintett fájlok:
     + resources/views/main.njk
     + resources/views/layout.njk
@@ -381,7 +381,7 @@ Admin
     + app/Http/Controllers/UserController.js/ajaxLogin
 - Működés: A bejelntkezés gomb megnyomására, a popup_login.js-ben lévő javascript megjelenít egy modalt, amely tartlamazza a belépés form-ját, a küldés gomb megnyomására elküld egy XMLHttpRequest-et az ajaxLogin controllernek, amely megpróbálja beléptteni a felhasználót, és sikeres/sikertelen jelzést küld vissza attól függően, hogy sikerült-e. A javascript ennek hatására frissíti a DOM-ot, sikertelen jelzés esetén hobát jelez, sikeres esetén pedig bezárja a modal-t, és frissíti a navigációs menüt.   
 
-## Kliens oldali validálás bootsrap validator segítségével felhasználó hozzáadásánál:
+#### Kliens oldali validálás bootsrap validator segítségével felhasználó hozzáadásánál:
 - Érintett fájlok:
     + resources/views/register.njk
 - Működés: Validálás bootsrap validator segítségével, az alábbi validálásokat tartalmazza:
@@ -391,7 +391,7 @@ Admin
     + Email-nek helyes fórmátumunak kell lennie.
 - Ha ezek teljseülnek, aktívvá válik a küldés gomb.      
 
-## Logolás project/task-hoz modal és ajax segítségével:
+#### Logolás project/task-hoz modal és ajax segítségével:
 - Érintett fájlok:
     + resources/views/projectShow.njk
     + resources/views/taskShow.njk
@@ -400,3 +400,36 @@ Admin
     + app/Http/Controllers/LogController.js/ajaxTaskLog
     + app/Http/Controllers/LogController.js/ajaxProjectLog
 - Működés: A Loggol gomb megnyomására, a popup_log.js-ben lévő javascript megjelenít egy modalt, amely tartlamazza a log form-ját, a küldés gomb megnyomására elküld egy XMLHttpRequest-et az ajaxTaskLog/ajaxProjectLog controllernek, amely hozzáadja az adatbázishoz a logot majd sikeres jelzést küld. A javascript ennek hatására frissíti a DOM-ot, bezárja a modalt és frissíti a logok listáját.
+
+
+
+### Funkcionális tesztek:
+
+- Selnium telepítése:
+    + Firefox letöltése
+    + Selenium IDE telepítése kiegészítőként: https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
+
+- Tesztek futtatása:
+- 2 féle módszer:
+    + Tesztek egyenként való importálása:
+        + File/Open: Megnyitja a kiválasztott selenium tesztet.
+    + Test Suite importálása:
+        + File/Open New Test Suite : Ez megnyitja a test suitot, amely egy összefüggő tesztsorozatot tartalmaz.
+
+- Test Suite tartalma, a teszt esetek külön fájlokban is megtalálhatók:
+    + AdminLogin : Bejelentkezik admin felhasználóbal(Feltételez admin@admin.hu:admin felhasználót)
+    + AdminAddUSer : Új felhasználó hozzáadása
+    + Kilep : Kilép
+    + LeaderLogin : Belépés vezetővel(Feltételez leader@leader.hu:leader felhasználót)
+    + LeaderNewProject: Project létrehozása
+    + LeaderNewTask: Task létrehozása(Feltételez Project123 projektet)
+    + LeaderAssign(Feltételez legalább egy felhasználót, Project123 projektet,Task123 taskot): Hozzárendel egy dolgozót a task-hoz.
+    + LeaderUnassign(Feltételez legalább egy felhasználót, Project123 projektet,Task123 taskot): Töröl egy dolgozót a task-ról.
+    + LeaderAssignForWorkerTest(Feltételez legalább egy felhasználót, Project123 projektet,Task123 taskot): Hozzárendel egy felhasználót a worker teszthez.
+    + WorkerLogin : Belépés dolgozóval(Feltételez worker@worker.hu:worker felhasználót)
+    + WorkerLog:(Felttelezi hogy hozzávan rendelve Task123-hoz):Időt logol egy task-hoz.
+- Helyes lefutás esetén hasonlót kell látnunk(Egész test suite könnyen futtatható Actions/Play Entire Test Suite segítségével):
+    ![Success](docs/Testok.png) 
+
+
+
